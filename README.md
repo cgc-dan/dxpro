@@ -1,2 +1,2 @@
-# Landing Page
-Simple, easy, fast rendering web page
+# Design-Xpro.com
+stuff from Dan's blog
