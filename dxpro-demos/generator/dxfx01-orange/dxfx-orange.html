@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Overlay Bar 01</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+
+
+
+<style>
+*{box-sizing:border-box;image-rendering: crisp-edges;-webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;}
+body{width:100%;height:auto;margin:0 auto;-webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;font-smooth: 2em;font-weight:100;font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;}
+
+
+
+#dxuimain{width:100%;height:auto;margin:0 auto;-webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;font-smooth: 2em;font-weight:100;font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;float:none;clear:both;position:absolute;top:0;left:0;}
+#dxuimain #html-content-holder{width: 100%;height:auto;margin:20px auto 22px auto;}
+#dxuimain #previewImage img,#dxuimain #previewImage canvas{display:block;width: 100%;height:auto;image-rendering: crisp-edges;margin:0 auto;}
+#dxuimain .outputimage{margin:0 auto;text-align:center;height:auto;}
+
+
+#dxuimain .dxcolant{display:block;width:100%;height:auto;min-height:20px;margin:0 auto 12px auto;}
+#dxuimain .dxbuttons{display:block;width:100%;height:auto;margin:0 auto 12px auto;padding:.5em 0 .5em;background-color:#f1f1f1;text-align:center;}
+
+
+
+#dxuimain .checkers{background-image: linear-gradient(45deg, #808080 25%, transparent 25%), linear-gradient(-45deg, #808080 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #808080 75%), linear-gradient(-45deg, transparent 75%, #808080 75%);background-size: 20px 20px;background-position: 0 0, 0 10px, 10px -10px, -10px 0px;}
+#dxuimain .dxinfo{display:block;width:100%;height:auto;margin:0 auto 12px auto;padding:.5em 0 .5em;background-color:#f1f1f1;text-align:center;}
+#dxuimain .dxinfo h2{font-weight:400;font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;}
+#dxuimain .hide{display:none;}
+/*** General ***/
+#dxuimain input[type=button]:hover{cursor:pointer;}
+#dxfxob01main ::-moz-selection { /* Code for Firefox */
+  color: #FC0;background: #22434A;}
+#dxfxob01main ::selection {color: #FC0;background: #22434A;}
+#dxfxob01main :focus{background:rgba(0,0,0,.2);border:none;box-shadow:none; outline:none;}
+#dxfxob01main [contenteditable=true]:empty:not(:focus):before{content:attr(data-text);}
+#dxfxob01main [contenteditable=true]{border:0px solid rgba(255,255,255,0.0);}
+#dxfxob01main [contenteditable=true]:hover{border:0px solid #09C;}
+
+#dxuimain input,#dxuimain input[type="button"],
+#dxuimain button.dxbtn,
+#dxuimain input.dxbtn,
+#dxuimain .dxbtn{display:inline-block;padding:.5em 1em .5em;text-align:center;font-size:1.4rem;color:#fff;background-color:#C06; outline:none;border-radius:6px;text-decoration:none;border:0;font-weight:100;font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;}
+#dxuimain input[type="button"]:hover,
+#dxuimain button.dxbtn:hover,
+#dxuimain .dxbtn:hover{background-color:#903;color:#fff;font-weight:100;font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;}
+#dxuimain .dxcolant h2{display:block;width:100%;height:auto;margin:20px auto 11px auto;text-align:center;font-size:26px;color:#444;font-weight:200;padding:.5em 0 .5em;border-bottom:1px solid #666;}
+
+#dxuimain .dx-icon-svg {width: 1em;height: 1em;transform:translate(-7px,2px);}
+#dxuimain .dx-icon-svg path,
+#dxuimain .dx-icon-svg polygon,
+#dxuimain .dx-icon-svg rect {fill: #fff;}
+#dxuimain .dx-icon-svg circle {stroke: #fff;stroke-width: 1;}
+
+#dxuimain .hidden{height:0;opacity:0;transition:all .3s;}
+#dxuimain .show{height:auto;opacity:1;}
+#dxuimain #udxinfo{display:block;width:100%;height:auto;margin:10px auto 12px auto;background-color:#f1f1f1;}
+#dxuimain .dxignia{display:block;width:80%;height:auto;margin:0 auto;padding:1.5em 0 .6em;font-size:1.7rem;font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;}
+
+#dxfxob01main:before,
+#dxfxob01main:after{content:"";display:table;clear:both;}
+.dxfxobg01{background-image: url("https://raw.githubusercontent.com/cgc-dan/dxpro/main/dxpro-demos/generator/dxfx01-orange/dxfx01-orange.png");background-repeat:no-repeat;background-size:100% 100%;background-position:top center;}
+.dxfxobg02{background-image: url("https://raw.githubusercontent.com/cgc-dan/dxpro/main/dxpro-demos/generator/dxfx01-orange/dxfx02-orange.png");background-repeat:no-repeat;background-size:100% 100%;background-position:top center; }
+</style>
+</head>
+
+<body>
+
+
+
+
+<div id="dxuimain">
+
+<div class="dxinfo">
+<h2>Type to change text based content and click the Preview button. When done, right-click the image to save it as PNG</h2>
+</div>
+
+<div class="dxcolant">
+
+
+<div id="html-content-holder">
+
+<div id="dxfxob01main" class="dxfxobg01 " style="display:block;width:100%;height:auto;margin:0 auto;box-sizing:border-box;float:none;clear:left;padding:.7em 0 .7em;font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;text-shadow:0 1px 0 #000;color:#fff;">
+  <div style="display:block;width:33.33%;height:auto;float:left;font-size:2rem;text-align:right;" contenteditable="true">@username</div>
+  <div style="display:block;width:33.33%;height:auto;float:left;font-size:2rem;text-align:center;font-weight:700;" contenteditable="true">ONLINE</div>
+  <div style="display:block;width:33.33%;height:auto;float:left;font-size:2rem;text-align:left;" contenteditable="true">@username</div>
+</div>
+
+
+    </div>
+    
+    
+</div>  
+
+  
+  
+  
+<div class="dxcolant">    
+    
+  <div class="dxbuttons">
+    <input id="btn-Preview-Image" type="button" class="dxbtn" value="Preview"/>
+    <button onclick="changebg()" class="dxbtn"><svg class="dx-icon-svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M.002 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-12a2 2 0 0 1-2-2V3zm1 9l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094L15.002 9.5V13a1 1 0 0 1-1 1h-12a1 1 0 0 1-1-1v-1zm5-6.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+</svg>Change</button>
+    <button  class="dxbtn" onclick="window.location.href=window.location.href"><svg class="dx-icon-svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M2.854 7.146a.5.5 0 0 0-.708 0l-2 2a.5.5 0 1 0 .708.708L2.5 8.207l1.646 1.647a.5.5 0 0 0 .708-.708l-2-2zm13-1a.5.5 0 0 0-.708 0L13.5 7.793l-1.646-1.647a.5.5 0 0 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0 0-.708z"/>
+  <path fill-rule="evenodd" d="M8 3a4.995 4.995 0 0 0-4.192 2.273.5.5 0 0 1-.837-.546A6 6 0 0 1 14 8a.5.5 0 0 1-1.001 0 5 5 0 0 0-5-5zM2.5 7.5A.5.5 0 0 1 3 8a5 5 0 0 0 9.192 2.727.5.5 0 1 1 .837.546A6 6 0 0 1 2 8a.5.5 0 0 1 .501-.5z"/>
+</svg> Refresh</button>
+<button  class="dxbtn" onclick="idxinfo()"><svg class="dx-icon-svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+</svg> info</button>
+
+    <span class="hide">
+    <a class="dxbtn" id="btn-Convert-Html2Image" href="#">Download</a>
+    </span>
+   </div>
+   
+   
+    <h2>Preview :</h2>
+    <div id="previewImage" class="outputimage checkers">
+    </div>
+    
+    <div id="udxinfo" class="hidden">
+     <div class="dxignia">
+     <div>
+        <p><strong>About..</strong></p>
+        <p>This is a simple HTML 2 PNG generator allowing you to generate PNG overlay from editable HTML code snippet</p>
+        <p>Can be used to with OBS or SplitCam Software</p>
+        </div>
+        
+        <div>
+         <p><strong>How to..</strong></p>
+         <p>1. Type to edit text</p>
+         <p>2. Click the Preview button to generate the PNG file</p>
+         <p>2a. Optional action - you can change/toggle the background image for the overlay</p>
+         <p>3. Optional action - use the Refresh button to rest back to default</p>
+         <p>4. Right click the generated PNG to save it as image in your device</p>
+      </div>
+     </div>
+    </div>
+    
+</div>
+
+
+</div>
+<script>
+$(document).ready(function(){
+
+	
+var element = $("#html-content-holder"); // global variable
+var getCanvas; // global variable
+ 
+    $("#btn-Preview-Image").on('click', function () {
+         html2canvas(element, {
+         onrendered: function (canvas) {
+                $("#previewImage").append(canvas);
+                getCanvas = canvas;
+             }
+         });
+    });
+
+	$("#btn-Convert-Html2Image").on('click', function () {
+    var imgageData = getCanvas.toDataURL("image/png");
+    // Now browser starts downloading it instead of just showing it
+    var newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
+    $("#btn-Convert-Html2Image").attr("download", "your_pic_name.png").attr("href", newData);
+	});
+
+});
+
+function changebg() {
+   var element = document.getElementById("dxfxob01main");
+   element.classList.toggle("dxfxobg02");
+}
+
+function idxinfo() {
+   var element = document.getElementById("udxinfo");
+   element.classList.toggle("show");
+}
+
+</script>
+
+
+</body>
+</html>
